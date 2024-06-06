@@ -1,1 +1,13 @@
-<p>task-list works!</p>
+<div class="task-list-container">
+    <h1>Lista delle Attività</h1>
+    <button (click)="addTask()">Aggiungi Attività</button>
+    <div *ngFor="let task of tasks" class="task-item">
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.description }}</p>
+      <p>Data di scadenza: {{ task.dueDate | date }}</p>
+      <p>Status: {{ task.completed ? 'Completata' : 'Non completata' }}</p>
+      <button (click)="completeTask(task.id)" [disabled]="task.completed">Completa</button>
+      <button (click)="deleteTask(task.id)">Elimina</button>
+    </div>
+  </div>
+  

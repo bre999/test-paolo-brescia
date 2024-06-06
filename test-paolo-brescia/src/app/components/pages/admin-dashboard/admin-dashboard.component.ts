@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProjectListComponent } from '../../shared/project-list/project-list.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [],
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+  styleUrls: ['./admin-dashboard.component.scss'],
+  imports: [CommonModule, ProjectListComponent]
 })
-export class AdminDashboardComponent {
-
-}
+export class AdminDashboardComponent {}
