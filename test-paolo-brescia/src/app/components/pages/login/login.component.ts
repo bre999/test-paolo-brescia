@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
+import { Store } from '@ngrx/store';
+import { User, UserRole } from '../../../models/user.model';
+import { login, logout } from '../../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +14,21 @@ import { AuthService } from '../../../services/auth.service';
   imports: [CommonModule]
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private store: Store) { }
 
-  // Metodo per simulare il login come amministratore
-  loginAsAdmin() {
-    this.authService.loginAsAdmin();
-    this.router.navigate(['/admin-dashboard']); // Reindirizza alla pagina di gestione dell'amministratore
+  // Funzione generica di login che accetta il ruolo e l'ID dell'utente
+  login(role: string, id: string) {
+    const user: User = { 'id':id, 'role':role as UserRole};
+    this.authService.login(user);
+    if (role === 'Administrator') {
+      this.router.navigate(['/admin-dashboard']);
+    } else {
+      this.router.navigate(['/user-dashboard']);
+    }
   }
-
-  // Metodo per simulare il login come utente 1
-  loginAsUser1() {
-    this.authService.loginAsUser1();
-    this.router.navigate(['/user-dashboard']); // Reindirizza alla pagina di gestione dell'utente
-  }
-
-  // Metodo per simulare il login come utente 2
-  loginAsUser2() {
-    this.authService.loginAsUser2();
-    this.router.navigate(['/user-dashboard']); // Reindirizza alla pagina di gestione dell'utente
+  
+  logout() {
+    this.authService.logout()
+    this.router.navigate(['/login']);
   }
 }

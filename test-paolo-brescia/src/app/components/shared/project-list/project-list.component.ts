@@ -5,6 +5,9 @@ import { TaskListComponent } from '../task-list/task-list.component';
 import { ProjectService } from '../../../services/project.service';
 import { Project } from '../../../models/project.model';
 import { AuthService } from '../../../services/auth.service';
+import { Observable } from 'rxjs';
+import { User } from '../../../models/user.model';
+
 
 @Component({
   selector: 'app-project-list',
@@ -14,37 +17,28 @@ import { AuthService } from '../../../services/auth.service';
   imports: [CommonModule, TaskListComponent]
 })
 export class ProjectListComponent implements OnInit {
-  @Input() isAdmin: boolean = false; // Permette di specificare se il componente è usato dall'amministratore
-  projects: Project[] = [];
+  currentUser$: Observable<User| null>;
+  projects$: Observable<Project[]>;
   selectedProjectId: string | null = null;
 
-  constructor(private projectService: ProjectService, private authService: AuthService) {}
+  constructor(private projectService: ProjectService, private authService: AuthService) { 
+    this.projects$ = this.projectService.getProjects();
+    this.currentUser$ = this.authService.getUser();
+  }
+  
 
-  ngOnInit() {
-    const userId = this.authService.getUserId();
-    if (this.isAdmin) {
-      this.projects = this.projectService.getAllProjects();
-    } else {
-      this.projects = this.projectService.getProjects(userId!);
-    }
+  ngOnInit(): void {
+   
   }
 
   addProject() {
-    const userId = this.authService.getUserId();
-    const newProject: Project = {
-      id: (Math.random() * 1000).toString(),
-      userId: this.isAdmin ? 'admin' : userId!, // Assegna 'admin' se è un amministratore
-      name: 'Nuovo Progetto',
-      description: 'Descrizione del nuovo progetto'
-    };
-    this.projectService.addProject(newProject);
-    this.projects = this.isAdmin ? this.projectService.getAllProjects() : this.projectService.getProjects(userId!); // Aggiorna la lista dei progetti
+    this.projectService.addProject('name', 'desc');
+    this.projects$ = this.projectService.getProjects() // Aggiorna la lista dei progetti
   }
 
   deleteProject(projectId: string) {
     this.projectService.removeProject(projectId);
-    const userId = this.authService.getUserId();
-    this.projects = this.isAdmin ? this.projectService.getAllProjects() : this.projectService.getProjects(userId!); // Aggiorna la lista dei progetti
+    this.projects$ = this.projectService.getProjects() // Aggiorna la lista dei progetti
   }
 
   selectProject(projectId: string) {

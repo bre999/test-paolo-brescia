@@ -1,35 +1,30 @@
 import { Injectable, signal } from '@angular/core';
+import { User, UserRole } from '../models/user.model';
+import { Store } from '@ngrx/store';
+import { login, logout } from '../store/actions/auth.actions';
+import { Observable } from 'rxjs';
+import { selectUser } from '../store/selectors/auth.selectors';
 
-export interface User {
-  role: 'Admin' | 'User';
-  id: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private currentUser = signal<User | null>(null);
 
-  loginAsAdmin() {
-    this.currentUser.set({ role: 'Admin', id: 'admin' });
+  private currentUser = new Observable<User | null>;
+
+  constructor(private store: Store, ){
+    this.currentUser = this.store.select(selectUser)
   }
 
-  loginAsUser1() {
-    this.currentUser.set({ role: 'User', id: 'user1' });
+  logout(){
+    this.store.dispatch(logout());
   }
 
-  loginAsUser2() {
-    this.currentUser.set({ role: 'User', id: 'user2' });
+  login(user: User) {
+    this.store.dispatch(login({ user }));
   }
 
-  getRole() {
-    return this.currentUser()?.role;
+  getUser(): Observable<User | null> {
+    return this.currentUser
   }
 
-  getUserId() {
-    return this.currentUser()?.id;
-  }
-
-  isAuthenticated() {
-    return !!this.currentUser();
-  }
 }

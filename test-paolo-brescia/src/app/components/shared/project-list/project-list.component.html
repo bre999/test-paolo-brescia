@@ -1,13 +1,13 @@
 <div class="project-list-container">
-    <h1>{{ isAdmin ? 'Gestione Progetti' : 'I Miei Progetti' }}</h1>
+    <h1>{{ (currentUser$ | async)?.role === 'Administrator' ? 'Gestione Progetti' : 'I Miei Progetti' }}</h1>
     <button (click)="addProject()">Aggiungi Progetto</button>
-    <div *ngFor="let project of projects" class="project-item">
+    <div *ngFor="let project of (projects$ | async)" class="project-item">
       <h2 (click)="selectProject(project.id)">{{ project.name }}</h2>
       <p>{{ project.description }}</p>
       <button (click)="deleteProject(project.id)">Elimina</button>
       <button (click)="selectProject(project.id)">Assegna Task</button> <!-- Pulsante per assegnare task -->
       <div *ngIf="selectedProjectId === project.id">
-        <app-task-list [projectId]="project.id" [isAdmin]="isAdmin"></app-task-list>
+        <app-task-list [projectId]="project.id" [currentUser]="(currentUser$ | async)"></app-task-list>
       </div>
     </div>
   </div>

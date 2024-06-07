@@ -1,6 +1,8 @@
+import { User } from "./user.model";
+
 export interface Project {
   id: string;
-  userId: string;
+  user: User;
   name: string;
   description: string;
 }

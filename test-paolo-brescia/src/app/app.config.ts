@@ -8,8 +8,9 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import { projectReducer } from './store/reducer/project.reducer';
 import { taskReducer } from './store/reducer/task.reducer';
+import { authReducer } from './store/reducer/auth.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync('noop'), provideStore({projects: projectReducer,
-    tasks: taskReducer}), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }), provideEffects()]
+    tasks: taskReducer, auth: authReducer}), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }), provideEffects()]
 };
