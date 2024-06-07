@@ -17,28 +17,26 @@ import { User } from '../../../models/user.model';
   imports: [CommonModule, TaskListComponent]
 })
 export class ProjectListComponent implements OnInit {
-  currentUser$: Observable<User| null>;
+  currentUser$: Observable<User | null>;
   projects$: Observable<Project[]>;
   selectedProjectId: string | null = null;
 
-  constructor(private projectService: ProjectService, private authService: AuthService) { 
+  constructor(private projectService: ProjectService, private authService: AuthService) {
     this.projects$ = this.projectService.getProjects();
     this.currentUser$ = this.authService.getUser();
   }
-  
+
 
   ngOnInit(): void {
-   
+
   }
 
   addProject() {
     this.projectService.addProject('name', 'desc');
-    this.projects$ = this.projectService.getProjects() // Aggiorna la lista dei progetti
   }
 
   deleteProject(projectId: string) {
     this.projectService.removeProject(projectId);
-    this.projects$ = this.projectService.getProjects() // Aggiorna la lista dei progetti
   }
 
   selectProject(projectId: string) {

@@ -3,30 +3,27 @@ import { AuthService } from './auth.service';
 import { Project } from '../models/project.model';
 import { Observable, filter, map, of, switchMap, take } from 'rxjs';
 import { UserRole } from '../models/user.model';
+import { Store } from '@ngrx/store';
+import { addProject, removeProject } from '../store/actions/project.actions';
+import { selectAllProject, selectProjectsByUserId } from '../store/selectors/project.selector';
 
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
   private projects$ = Observable<Project[]>;
-
-  // Iniettiamo AuthService per verificare il ruolo dell'utente
   private authService = inject(AuthService);
   private projects = signal<Project[]>([])
-  constructor(private auth_service: AuthService) { }
+
+  constructor(private auth_service: AuthService, private store: Store) { }
   
   // Ottiene i progetti in base a gli utenti
   getProjects(): Observable<Project[]> {
-    console.log('getUser');
-    this.authService.getUser().subscribe(console.log)
-    console.log('projects');
-    console.log(this.projects());
-    
     return this.authService.getUser().pipe(
       switchMap(user => {
         if (user?.role === 'Utente Standard') {
-          return of(this.projects().filter(project => project.user.id === user.id));
+          return  this.store.select(selectProjectsByUserId(user.id));
         } else if (user?.role === 'Administrator' as UserRole) {
-          return of(this.projects());
+          return this.store.select(selectAllProject);
         } else {
           return of([]);
         }
@@ -43,11 +40,15 @@ export class ProjectService {
         if (user) {
           const project: Project = {
             id: (Math.random() * 1000).toString(),
-            user: user, // Assegna 'admin' se è un amministratore
+            user: user,
             name: name,
             description: description
           };
-          this.projects.set([...this.projects(), project]);
+          console.log('project');
+          console.log(project);
+          
+          this.store.dispatch(addProject({ project: project }));
+  
         } 
       })
     ).subscribe();
@@ -55,6 +56,6 @@ export class ProjectService {
 
   // Rimuove un progetto
   removeProject(projectId: string) {
-    this.projects.set(this.projects().filter(project => project.id !== projectId));
+    this.store.dispatch(removeProject({ projectId }));
   }
 }

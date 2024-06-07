@@ -1,7 +1,7 @@
 <div class="task-list-container">
     <h1>Lista delle Attività</h1>
     <button (click)="addTask()">Aggiungi Attività</button>
-    <div *ngFor="let task of tasks" class="task-item">
+    <div *ngFor="let task of (tasks$ | async)" class="task-item">
       <h3>{{ task.title }}</h3>
       <p>{{ task.description }}</p>
       <p>Data di scadenza: {{ task.dueDate | date }}</p>

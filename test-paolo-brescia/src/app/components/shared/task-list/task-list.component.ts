@@ -14,40 +14,58 @@ import { User } from '../../../models/user.model';
   imports: [CommonModule]
 })
 export class TaskListComponent implements OnInit {
+  
+  private _projectId: string | undefined;
   @Input() currentUser: User | null = null; // Permette di specificare se il componente è usato dall'amministratore
-  @Input() projectId: string | undefined = undefined; // ID del progetto selezionato
-  tasks: Task[] = [];
+  @Input() 
+  set projectId(value: string | undefined) {
+    this._projectId = value;
+    if (this._projectId) {
+      this.loadTasks(this._projectId);
+    }
+  }
+
+  tasks$: Observable<Task[]>;
   error: string | null = null;
   currentUser$: Observable<User | null>;
   constructor(private taskService: TaskService, private authService: AuthService) {
     this.currentUser$ = this.authService.getUser();
+    this.tasks$ = this.taskService.getTasks(this.projectId!);
   }
 
-  ngOnInit() {
-    this.tasks = this.taskService.getTasks(this.projectId!)
+  ngOnInit(): void {
+    this.tasks$.subscribe(console.log)
   }
 
   addTask() {
     const newTask: Task = {
       id: (Math.random() * 1000).toString(),
       userId: this.currentUser?.id!,
-      projectId: this.projectId!,
+      projectId: this._projectId!,
       title: 'Nuova Attività',
       description: 'Descrizione della nuova attività',
       dueDate: new Date().toISOString(),
       completed: false
     };
+    console.log('newTask');
+    console.log(newTask);
+    
     this.taskService.addTask(newTask);
-    this.tasks = this.taskService.getTasks(this.projectId!) // Aggiorna la lista delle attività
+    console.log('tsk ng');
+    
+    this.tasks$.subscribe(console.log);
+    
   }
 
   completeTask(taskId: string) {
     this.taskService.completeTask(taskId);
-    this.tasks = this.taskService.getTasks(this.projectId!) 
   }
 
   deleteTask(taskId: string) {
     this.taskService.removeTask(taskId);
-    this.tasks = this.taskService.getTasks(this.projectId!) 
+  }
+
+  private loadTasks(projectId: string): void {
+    this.tasks$ = this.taskService.getTasks(projectId);
   }
 }
