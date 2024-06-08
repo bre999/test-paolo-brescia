@@ -1,0 +1,47 @@
+@import '../../../../styles.scss';
+
+.header-toolbar {
+  background: $secondary-color; // Usa il colore secondario blu scuro per lo sfondo
+  box-shadow: 0 4px 8px $card-shadow;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  height: 64px; /* Altezza dell'header */
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombra più marcata */
+  flex: 1;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-icon {
+  color: white;
+  margin-right: 8px; /* Spazio tra l'icona utente e il pulsante logout */
+}
+
+/* Stili personalizzati per il tooltip */
+.custom-tooltip {
+  background-color: white !important;
+  color: black !important;
+  padding: 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.custom-tooltip .tooltip-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+

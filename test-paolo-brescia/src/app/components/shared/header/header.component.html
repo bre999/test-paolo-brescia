@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" class="header-toolbar">
+    <span class="header-title">{{ sectionTitle }}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button [matTooltip]="'Nome Utente:' + (user$ | async)!.name + ' Ruolo: ' + (user$ | async)!.role"  class="user-icon">
+      <mat-icon>person</mat-icon>
+    </button>
+    <button mat-button (click)="logout()" class="logout-button"><mat-icon>exit_to_app</mat-icon>Logout</button>
+  </mat-toolbar>

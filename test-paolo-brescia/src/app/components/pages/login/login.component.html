@@ -1,7 +1,22 @@
 <div class="login-container">
-    <h1>Login</h1>
-    <button (click)="login('Administrator', 'admin')">Login as Admin</button>
-    <button (click)="login('Utente Standard', 'user1')">Login as User 1</button>
-    <button (click)="login('Utente Standard', 'user2')">Login as User 2</button>
-  </div>
-  
+  <mat-grid-list cols="1" rowHeight="1:1" class="grid-container" gutterSize="16px">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div>
+            <button mat-raised-button color="primary" (click)="login('Administrator', 'admin', 'Amministratore')">Admin</button>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" (click)="login('Utente Standard', 'user1', 'Utente 2')">User 1</button>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" (click)="login('Utente Standard', 'user2', 'Utente 2')">User 2</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

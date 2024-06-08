@@ -2,3 +2,22 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+$primary-color: #2196F3;
+$primary-color-hover: #1976D2;
+$secondary-color: #1565C0; // Nuovo colore secondario
+$secondary-color-hover: #0D47A1; // Colore secondario al passaggio del mouse
+$background-gradient-start: #E3F2FD;
+$background-gradient-end: #BBDEFB;
+$card-background: #ECEFF1;
+$card-shadow: rgba(0, 0, 0, 0.1);
+$card-shadow-hover: rgba(0, 0, 0, 0.2);
+
+// Impostazioni globali
+body {
+    background: linear-gradient(to right, $background-gradient-start, $background-gradient-end);
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+  }
