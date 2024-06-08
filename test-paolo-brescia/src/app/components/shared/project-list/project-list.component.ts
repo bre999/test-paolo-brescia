@@ -7,6 +7,7 @@ import { Project } from '../../../models/project.model';
 import { AuthService } from '../../../services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from '../../../models/user.model';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { User } from '../../../models/user.model';
   standalone: true,
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  imports: [CommonModule, TaskListComponent]
+  imports: [CommonModule, TaskListComponent,  MatCardModule]
 })
 export class ProjectListComponent implements OnInit {
   currentUser$: Observable<User | null>;

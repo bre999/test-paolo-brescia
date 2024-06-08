@@ -5,13 +5,14 @@ import { AuthService } from '../../../services/auth.service';
 import { Task } from '../../../models/task.model';
 import { Observable } from 'rxjs';
 import { User } from '../../../models/user.model';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule,  MatCardModule]
 })
 export class TaskListComponent implements OnInit {
   

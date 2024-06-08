@@ -1,16 +1,41 @@
+@import '../../../../styles.scss';
 .project-list-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2em;
-  }
-  
-  .project-item {
-    border: 1px solid #ccc;
-    padding: 1em;
-    margin-bottom: 1em;
-  }
-  
-  button {
-    margin-right: 0.5em;
-  }
-  
+  padding: 24px; // Maggiore padding per spaziatura uniforme
+}
+
+.project-list-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333333; // Colore più scuro per migliore contrasto
+  margin-bottom: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-item {
+  margin-bottom: 24px; // Maggiore spaziatura tra le card
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Ombra più marcata
+  border-radius: 8px;
+  background: white;
+}
+
+mat-card-title {
+  cursor: pointer;
+  color: #333333; // Colore più scuro per il titolo della card
+  font-size: 1.25rem;
+}
+
+mat-card-content {
+  padding: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 16px;
+}
+
+button {
+  margin: 0 4px;
+  border-radius: 4px;
+  padding: 8px 16px;
+}

@@ -1,13 +1,18 @@
 <div class="task-list-container">
-    <h1>Lista delle Attività</h1>
-    <button (click)="addTask()">Aggiungi Attività</button>
-    <div *ngFor="let task of (tasks$ | async)" class="task-item">
-      <h3>{{ task.title }}</h3>
+  <h1>Lista delle Attività</h1>
+  <button mat-raised-button color="primary" (click)="addTask()">Aggiungi Attività</button>
+  <mat-card *ngFor="let task of (tasks$ | async)" class="task-item">
+    <mat-card-header>
+      <mat-card-title>{{ task.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <p>{{ task.description }}</p>
       <p>Data di scadenza: {{ task.dueDate | date }}</p>
       <p>Status: {{ task.completed ? 'Completata' : 'Non completata' }}</p>
-      <button (click)="completeTask(task.id)" [disabled]="task.completed">Completa</button>
-      <button (click)="deleteTask(task.id)">Elimina</button>
-    </div>
-  </div>
-  
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="completeTask(task.id)" [disabled]="task.completed">Completa</button>
+      <button mat-button color="warn" (click)="deleteTask(task.id)">Elimina</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -23,6 +23,7 @@
   flex: 1;
 }
 
+
 .user-icon {
   color: white;
   margin-right: 8px; /* Spazio tra l'icona utente e il pulsante logout */
@@ -43,5 +44,21 @@
   align-items: center;
 }
 
+.logout-button {
+    color: white;
+    background: $primary-color;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Aggiungi trasformazione */
+    box-shadow: 0 2px 4px $card-shadow;
+  
+    &:hover {
+      background: $primary-color-hover;
+      box-shadow: 0 4px 8px $card-shadow-hover;
+      transform: scale(1.05); /* Aggiungi leggero ingrandimento */
+    }
+  }
 
 

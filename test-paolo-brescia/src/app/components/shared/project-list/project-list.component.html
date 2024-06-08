@@ -1,14 +1,19 @@
 <div class="project-list-container">
-    <h1>{{ (currentUser$ | async)?.role === 'Administrator' ? 'Gestione Progetti' : 'I Miei Progetti' }}</h1>
-    <button (click)="addProject()">Aggiungi Progetto</button>
-    <div *ngFor="let project of (projects$ | async)" class="project-item">
-      <h2 (click)="selectProject(project.id)">{{ project.name }}</h2>
+  <h1>{{ (currentUser$ | async)?.role === 'Administrator' ? 'Gestione Progetti' : 'I Miei Progetti' }}</h1>
+  <button mat-raised-button color="primary" (click)="addProject()">Aggiungi Progetto</button>
+  <mat-card *ngFor="let project of (projects$ | async)" class="project-item">
+    <mat-card-header>
+      <mat-card-title (click)="selectProject(project.id)">{{ project.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <p>{{ project.description }}</p>
-      <button (click)="deleteProject(project.id)">Elimina</button>
-      <button (click)="selectProject(project.id)">Assegna Task</button> <!-- Pulsante per assegnare task -->
-      <div *ngIf="selectedProjectId === project.id">
-        <app-task-list [projectId]="project.id" [currentUser]="(currentUser$ | async)"></app-task-list>
-      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="warn" (click)="deleteProject(project.id)">Elimina</button>
+      <button mat-button color="primary" (click)="selectProject(project.id)">Assegna Task</button>
+    </mat-card-actions>
+    <div *ngIf="selectedProjectId === project.id">
+      <app-task-list [projectId]="project.id" [currentUser]="(currentUser$ | async)"></app-task-list>
     </div>
-  </div>
-  
+  </mat-card>
+</div>
