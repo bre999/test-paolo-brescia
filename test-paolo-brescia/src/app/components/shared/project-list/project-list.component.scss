@@ -24,24 +24,37 @@
   border-radius: 8px;
   background: white;
   border: 2px solid rgba(0, 0, 0, 0.1); // Bordo evidente per dare più profondità
-  position: relative; // Necessario per posizionare l'icona di modifica
+  position: relative; // Necessario per posizionare le icone di modifica e eliminazione
 }
 
-.project-header {
+mat-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
-.edit-button {
+.project-actions {
   position: absolute;
   top: 8px;
   right: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button, .delete-button {
   width: 24px;
   height: 24px;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   mat-icon {
-    font-size: 16px;
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -68,11 +81,5 @@ button {
 }
 
 mat-icon {
-  vertical-align: middle;
-}
-
-button mat-icon {
-  font-size: 20px;
-  margin-right: 8px;
   vertical-align: middle;
 }
