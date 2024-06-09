@@ -19,7 +19,15 @@
     </mat-card-header>
     <mat-card-content>
       <p>{{ project.description }}</p>
-      <p>Assegnato a: {{ project.user.name }}</p>
+      <p>Assegnato a: {{ project.user.id }}</p>
+      <ng-container *ngIf="getCompletionPercentage(project.id) | async as completionPercentage; else zeroProgress">
+        <mat-progress-bar mode="determinate" [value]="completionPercentage"></mat-progress-bar>
+        <p>{{ completionPercentage | number:'1.0-2' }}% completato</p>
+      </ng-container>
+      <ng-template #zeroProgress>
+        <mat-progress-bar mode="determinate" [value]="0"></mat-progress-bar>
+        <p>0% completato</p>
+      </ng-template>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button color="primary" (click)="selectProject(project.id)">Assegna Task</button>

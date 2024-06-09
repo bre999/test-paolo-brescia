@@ -83,3 +83,14 @@ button {
 mat-icon {
   vertical-align: middle;
 }
+
+mat-progress-bar {
+  margin-top: 16px;
+  height: 20px;
+  &.mat-progress-bar {
+    background: $primary-color;
+    .mat-progress-bar-fill::after {
+      background: $primary-color-hover;
+    }
+  }
+}
