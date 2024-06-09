@@ -6,13 +6,14 @@ import { Task } from '../../../models/task.model';
 import { Observable } from 'rxjs';
 import { User } from '../../../models/user.model';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
-  imports: [CommonModule,  MatCardModule]
+  imports: [CommonModule,  MatCardModule, MatIconModule]
 })
 export class TaskListComponent implements OnInit {
   

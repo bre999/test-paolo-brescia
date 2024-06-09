@@ -1,6 +1,10 @@
 <div class="task-list-container">
-  <h1>Lista delle Attività</h1>
-  <button mat-raised-button color="primary" (click)="addTask()">Aggiungi Attività</button>
+  <div class="header">
+    <h1>Lista delle Attività</h1>
+    <button mat-raised-button color="primary" (click)="addTask()">
+      <mat-icon>add</mat-icon> Nuova Attività
+    </button>
+  </div>
   <mat-card *ngFor="let task of (tasks$ | async)" class="task-item">
     <mat-card-header>
       <mat-card-title>{{ task.title }}</mat-card-title>

@@ -1,12 +1,22 @@
 <div class="project-list-container">
-  <h1>{{ (currentUser$ | async)?.role === 'Administrator' ? 'Gestione Progetti' : 'I Miei Progetti' }}</h1>
-  <button mat-raised-button color="primary" (click)="addProject()">Aggiungi Progetto</button>
+  <div class="header">
+    <h1>{{ (currentUser$ | async)?.role === 'Administrator' ? 'Gestione Progetti' : 'I Miei Progetti' }}</h1>
+    <button mat-raised-button color="primary" (click)="addProject()">
+      <mat-icon>add</mat-icon> Nuovo Progetto
+    </button>
+  </div>
   <mat-card *ngFor="let project of (projects$ | async)" class="project-item">
     <mat-card-header>
-      <mat-card-title (click)="selectProject(project.id)">{{ project.name }}</mat-card-title>
+      <div class="project-header">
+        <mat-card-title (click)="selectProject(project.id)">{{ project.name }}</mat-card-title>
+        <button mat-icon-button class="edit-button" (click)="editProject(project.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
     </mat-card-header>
     <mat-card-content>
       <p>{{ project.description }}</p>
+      <p>Assegnato a: {{ project.user.name}}</p>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button color="warn" (click)="deleteProject(project.id)">Elimina</button>

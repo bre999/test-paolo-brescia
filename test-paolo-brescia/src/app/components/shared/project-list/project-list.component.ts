@@ -8,6 +8,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from '../../../models/user.model';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { MatCardModule } from '@angular/material/card';
   standalone: true,
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  imports: [CommonModule, TaskListComponent,  MatCardModule]
+  imports: [CommonModule, TaskListComponent, MatCardModule, MatIconModule]
 })
 export class ProjectListComponent implements OnInit {
   currentUser$: Observable<User | null>;
@@ -47,4 +48,8 @@ export class ProjectListComponent implements OnInit {
   clearSelection() {
     this.selectedProjectId = null;
   }
+
+  editProject(project_id: string) { }
 }
+
+
