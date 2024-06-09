@@ -8,6 +8,14 @@
   <mat-card *ngFor="let task of (tasks$ | async)" class="task-item">
     <mat-card-header>
       <mat-card-title>{{ task.title }}</mat-card-title>
+      <div class="project-actions">
+        <button mat-icon-button class="edit-button" (click)="editProject(task.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button class="delete-button" (click)="deleteTask(task.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </mat-card-header>
     <mat-card-content>
       <p>{{ task.description }}</p>

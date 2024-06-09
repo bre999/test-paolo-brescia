@@ -12,6 +12,30 @@
   margin-bottom: 24px;
 }
 
+.project-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button, .delete-button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mat-icon {
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .task-list-container h1 {
   font-size: 2rem;
   font-weight: bold;
@@ -50,6 +74,5 @@ button {
 
 button mat-icon {
   font-size: 20px;
-  margin-right: 8px;
   vertical-align: middle;
 }

@@ -13,13 +13,13 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
-  imports: [CommonModule,  MatCardModule, MatIconModule]
+  imports: [CommonModule, MatCardModule, MatIconModule]
 })
 export class TaskListComponent implements OnInit {
-  
+
   private _projectId: string | undefined;
   @Input() currentUser: User | null = null; // Permette di specificare se il componente è usato dall'amministratore
-  @Input() 
+  @Input()
   set projectId(value: string | undefined) {
     this._projectId = value;
     if (this._projectId) {
@@ -51,12 +51,12 @@ export class TaskListComponent implements OnInit {
     };
     console.log('newTask');
     console.log(newTask);
-    
+
     this.taskService.addTask(newTask);
     console.log('tsk ng');
-    
+
     this.tasks$.subscribe(console.log);
-    
+
   }
 
   completeTask(taskId: string) {
@@ -69,5 +69,8 @@ export class TaskListComponent implements OnInit {
 
   private loadTasks(projectId: string): void {
     this.tasks$ = this.taskService.getTasks(projectId);
+  }
+  editProject(taskId: string) {
+
   }
 }

@@ -1,0 +1,35 @@
+@import '../../../../styles.scss';
+.dialog-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .warning-icon {
+      color: #f44336; // colore rosso per l'icona di avvertimento
+      font-size: 24px;
+      margin-right: 10px; // aggiungi margine destro per separare l'icona dal testo
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+  
+  .mat-dialog-actions {
+    justify-content: space-between;
+  }
+  
+  button {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .cancel-button {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  .confirm-button {
+    background-color: $primary-color; // usa la variabile $primary-color
+    color: white;
+  }

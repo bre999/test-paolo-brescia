@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar'
 import { TaskService } from '../../../services/task.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -18,27 +20,30 @@ import { TaskService } from '../../../services/task.service';
   standalone: true,
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  imports: [CommonModule, TaskListComponent, MatCardModule, MatIconModule, MatProgressBar]
+  imports: [CommonModule, TaskListComponent, MatCardModule, MatIconModule, MatProgressBar, MatDialogModule]
 })
 export class ProjectListComponent implements OnInit {
   currentUser$: Observable<User | null>;
   projects$: Observable<Project[]>;
   selectedProjectId: string | null = null;
 
-  constructor(private projectService: ProjectService, private authService: AuthService, private taskService: TaskService) {
+  constructor(private projectService: ProjectService, private authService: AuthService, private taskService: TaskService, private dialog: MatDialog) {
     this.projects$ = this.projectService.getProjects();
     this.currentUser$ = this.authService.getUser();
   }
 
 
   ngOnInit(): void {
+    let cici = ['ciao', 'halo']
+    console.log('cici.length');
+    console.log(cici.length);
 
   }
 
   addProject() {
     this.projectService.addProject('name', 'desc');
     console.log('percentage');
-    
+
     this.getCompletionPercentage(this.selectedProjectId!).subscribe(console.log)
     console.log('tasks');
 
@@ -46,7 +51,17 @@ export class ProjectListComponent implements OnInit {
   }
 
   deleteProject(projectId: string) {
-    this.projectService.removeProject(projectId);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Sei sicuro di voler eliminare questo progetto?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.projectService.removeProject(projectId);
+      }
+    });
   }
 
   selectProject(projectId: string) {
@@ -55,6 +70,14 @@ export class ProjectListComponent implements OnInit {
 
   clearSelection() {
     this.selectedProjectId = null;
+  }
+
+  getTaskLength(projectId: string): Observable<number> {
+    return this.taskService.getTasks(projectId).pipe(
+      map(tasks => {
+        return tasks.length ?? 0
+      })
+    )
   }
 
   editProject(project_id: string) { }
