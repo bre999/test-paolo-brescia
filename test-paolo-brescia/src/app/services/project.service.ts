@@ -14,7 +14,10 @@ export class ProjectService {
   private authService = inject(AuthService);
   private projects = signal<Project[]>([])
 
-  constructor(private auth_service: AuthService, private store: Store) { }
+  constructor(
+    private auth_service: AuthService, 
+    private store: Store
+  ) { }
 
   // Ottiene i progetti in base a gli utenti
   getProjects(): Observable<Project[]> {

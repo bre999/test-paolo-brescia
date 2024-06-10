@@ -9,6 +9,10 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.scss'],
-  imports: [CommonModule, ProjectListComponent, RouterModule]
+  imports: [
+    CommonModule, 
+    ProjectListComponent, 
+    RouterModule
+  ]
 })
 export class UserDashboardComponent {}

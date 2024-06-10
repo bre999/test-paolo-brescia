@@ -12,7 +12,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule,MatIconModule, MatTooltipModule],
+  imports: [
+    CommonModule, 
+    MatToolbarModule, 
+    MatButtonModule,
+    MatIconModule, 
+    MatTooltipModule
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -21,7 +27,10 @@ export class HeaderComponent {
   @Input() sectionTitle: string = '';
   user$: Observable<User | null>
 
-  constructor(private auth: AuthService, private router: Router){
+  constructor(
+    private auth: AuthService, 
+    private router: Router
+  ){
     this.user$ = this.auth.getUser();
   }
   logout(){

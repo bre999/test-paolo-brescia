@@ -16,7 +16,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
-  imports: [CommonModule, MatCardModule, MatIconModule]
+  imports: [
+    CommonModule, 
+    MatCardModule, 
+    MatIconModule
+  ]
 })
 export class TaskListComponent  {
 
@@ -33,7 +37,13 @@ export class TaskListComponent  {
   tasks$: Observable<Task[]>;
   error: string | null = null;
   currentUser$: Observable<User | null>;
-  constructor(private taskService: TaskService, private authService: AuthService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private taskService: TaskService, 
+    private authService: AuthService, 
+    private dialog: MatDialog, 
+    private router: Router, 
+    private route: ActivatedRoute
+  ) {
     this.currentUser$ = this.authService.getUser();
     this.tasks$ = this.taskService.getTasks(this.projectId!);
   }

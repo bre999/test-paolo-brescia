@@ -15,13 +15,22 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-project-form',
   standalone: true,
-  imports: [MatInputModule, MatButtonModule, ReactiveFormsModule, HeaderComponent, CommonModule, MatCardTitle, MatCardModule],
+  imports: [
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    HeaderComponent,
+    CommonModule,
+    MatCardTitle,
+    MatCardModule
+  ],
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.scss'
 })
 export class ProjectFormComponent {
   projectForm: FormGroup;
   editing_project: Project | null = null;
+  
   @Input()
   set id(projectId: string) {
     if (projectId) {
@@ -31,6 +40,7 @@ export class ProjectFormComponent {
       })
     }
   }
+
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
@@ -41,8 +51,6 @@ export class ProjectFormComponent {
       description: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
-
-
 
   onSubmit() {
     if (this.projectForm.valid) {

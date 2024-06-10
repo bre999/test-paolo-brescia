@@ -23,7 +23,8 @@
       <p>Status: {{ task.completed ? 'Completata' : 'Non completata' }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="completeTask(task.id)" [disabled]="task.completed">Completa</button>
+      <button mat-raised-button color="primary" (click)="completeTask(task.id)"
+        [disabled]="task.completed">Completa</button>
     </mat-card-actions>
   </mat-card>
 </div>

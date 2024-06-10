@@ -11,7 +11,7 @@ export class AuthService {
 
   private currentUser = new Observable<User | null>;
 
-  constructor(private store: Store, ){
+  constructor(private store: Store){
     this.currentUser = this.store.select(selectUser)
   }
 

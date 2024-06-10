@@ -5,12 +5,12 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .grid-container {
   width: 100%;
-  margin: 0 1rem; 
+  margin: 0 1rem;
   max-height: 100% !important;
   display: flex;
   justify-content: center;
@@ -22,19 +22,19 @@ mat-card {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 25rem; 
+  max-width: 25rem;
   box-sizing: border-box;
-  padding: 1.5rem; 
-  border-radius: 1.25rem; 
+  padding: 1.5rem;
+  border-radius: 1.25rem;
   box-shadow: 0 0.25rem 0.5rem $card-shadow;
   background: $card-background;
-  border: 1px solid lightslategray; 
+  border: 1px solid lightslategray;
 }
 
 mat-card-header {
-  padding: 1rem; 
-  margin-bottom: 1rem; 
-  font-size: 1.5rem; 
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: grey;
 }
@@ -44,7 +44,7 @@ mat-card-content {
 }
 
 mat-card-content div {
-  margin-top: 1rem; 
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,18 +53,18 @@ mat-card-content div {
 
 mat-card-content button {
   width: 80%;
-  padding: 0.75rem; 
-  font-size: 1rem; 
+  padding: 0.75rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   color: white;
   border: none;
-  border-radius: 0.25rem; 
-  box-shadow: 0 0.125rem 0.25rem $card-shadow; 
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem $card-shadow;
   align-self: center;
   background: linear-gradient(to right, $primary-color, $primary-color-hover);
 
   &:hover {
     background: linear-gradient(to right, $primary-color-hover, $primary-color);
-    box-shadow: 0 0.25rem 0.5rem $card-shadow-hover; 
+    box-shadow: 0 0.25rem 0.5rem $card-shadow-hover;
   }
 }

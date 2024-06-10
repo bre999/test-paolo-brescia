@@ -21,14 +21,29 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  imports: [CommonModule, TaskListComponent, MatCardModule, MatIconModule, MatProgressBar, MatDialogModule,HeaderComponent,]
+  imports: [
+    CommonModule, 
+    TaskListComponent, 
+    MatCardModule, 
+    MatIconModule, 
+    MatProgressBar, 
+    MatDialogModule, 
+    HeaderComponent
+  ]
 })
 export class ProjectListComponent {
   currentUser$: Observable<User | null>;
   projects$: Observable<Project[]>;
   selectedProjectId: string | null = null;
 
-  constructor(private projectService: ProjectService, private authService: AuthService, private taskService: TaskService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute ) {
+  constructor(
+    private projectService: ProjectService, 
+    private authService: AuthService, 
+    private taskService: TaskService, 
+    private dialog: MatDialog, 
+    private router: Router, 
+    private route: ActivatedRoute
+  ) {
     this.projects$ = this.projectService.getProjects();
     this.currentUser$ = this.authService.getUser();
   }
@@ -67,7 +82,7 @@ export class ProjectListComponent {
     )
   }
 
-  editProject(projectId: string) { 
+  editProject(projectId: string) {
     this.router.navigate(['../project'], { relativeTo: this.route, queryParams: { 'id': projectId }, });
   }
 
