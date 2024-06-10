@@ -1,15 +1,16 @@
 @import '../../../../styles.scss';
+
 .dialog-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     .warning-icon {
-      color: #f44336; // colore rosso per l'icona di avvertimento
-      font-size: 24px;
-      margin-right: 10px; // aggiungi margine destro per separare l'icona dal testo
+      color: #f44336; 
+      font-size: 1.5rem; 
+      margin-right: 0.625rem;
     }
     h1 {
-      font-size: 20px;
+      font-size: 1.25rem; 
       font-weight: bold;
       margin: 0;
     }
@@ -20,7 +21,7 @@
   }
   
   button {
-    margin-left: 10px;
+    margin-left: 0.625rem; 
     font-weight: bold;
   }
   
@@ -30,6 +31,6 @@
   }
   
   .confirm-button {
-    background-color: $primary-color; // usa la variabile $primary-color
+    background-color: $primary-color; 
     color: white;
   }

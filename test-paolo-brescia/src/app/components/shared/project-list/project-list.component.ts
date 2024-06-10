@@ -58,6 +58,7 @@ export class ProjectListComponent {
     this.selectedProjectId = null;
   }
 
+
   getTaskLength(projectId: string): Observable<number> {
     return this.taskService.getTasks(projectId).pipe(
       map(tasks => {

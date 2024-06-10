@@ -1,34 +1,55 @@
 @import '../../../../styles.scss';
 
-
 .task-list-container {
-  padding: 24px;
+  padding: 1.5rem; /* 24px converted to rem */
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem; /* 24px converted to rem */
 }
 
-.project-actions {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+.task-list-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333333;
+  text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* 2px 2px 4px converted to rem */
+}
+
+.task-item {
+  margin-bottom: 1.5rem; /* 24px converted to rem */
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15); /* 0 4px 12px converted to rem */
+  border-radius: 0.5rem; /* 8px converted to rem */
+  background: white;
+  border: 0.125rem solid rgba(0, 0, 0, 0.1); /* 2px converted to rem */
+  position: relative;
+}
+
+mat-card-header {
   display: flex;
-  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 
-.edit-button, .delete-button {
-  width: 24px;
-  height: 24px;
+.task-actions {
+  display: flex;
+  gap: 0.75rem; /* 12px converted to rem */
+  align-items: center;
+  margin-left: auto;
+}
+
+.action-button {
+  width: 2rem; /* 32px converted to rem */
+  height: 2rem; /* 32px converted to rem */
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   mat-icon {
-    font-size: 20px;
+    font-size: 1.5rem; /* 24px converted to rem */
     line-height: 1;
     display: flex;
     align-items: center;
@@ -36,43 +57,28 @@
   }
 }
 
-.task-list-container h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333333; // Colore più scuro per migliore contrasto
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.task-item {
-  margin-bottom: 24px; // Maggiore spaziatura tra le card
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Ombra più marcata
-  border-radius: 8px;
-  background: white;
-  border: 2px solid rgba(0, 0, 0, 0.1); // Bordo evidente per dare più profondità
-}
-
 mat-card-title {
-  color: #333333; // Colore più scuro per il titolo della card
-  font-size: 1.25rem;
+  cursor: pointer;
+  color: #333333;
+  font-size: 1.5rem;
 }
 
 mat-card-content {
-  padding: 16px;
+  padding: 1rem; 
 }
 
 mat-card-actions {
   display: flex;
   justify-content: flex-end;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem; 
 }
 
 button {
-  margin: 0 4px;
-  border-radius: 4px;
-  padding: 8px 16px;
+  margin: 0 0.25rem; 
+  border-radius: 0.25rem; 
+  padding: 0.5rem 1rem; 
 }
 
-button mat-icon {
-  font-size: 20px;
+mat-icon {
   vertical-align: middle;
 }

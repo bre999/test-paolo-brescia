@@ -10,20 +10,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Location } from '@angular/common';
 import { MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { MAT_DATE_FORMATS, MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MY_DATE_FORMATS } from '../../../models/my-date-formats';
 
-const MY_DATE_FORMATS = {
-  parse: {
-    dateInput: 'DD/MM/YYYY',
-  },
-  display: {
-    dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'DD/MM/YYYY',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
 
 @Component({
   selector: 'app-task-form',
@@ -36,7 +26,7 @@ const MY_DATE_FORMATS = {
     MatInputModule, 
     MatCardTitle, 
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss',
@@ -68,13 +58,15 @@ export class TaskFormComponent {
     private taskService: TaskService,
     private location: Location,
     private fb: FormBuilder,
-    authService: AuthService
+    private authService: AuthService,
+    private dateAdapter: DateAdapter<Date>
   ){
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(3)]],
       dueDate: ['', Validators.required]
     });
+    this.dateAdapter.setLocale('it-IT'); 
   }
 
   onSubmit() {

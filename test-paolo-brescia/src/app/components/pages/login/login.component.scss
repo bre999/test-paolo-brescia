@@ -1,15 +1,16 @@
 @import '../../../../styles.scss';
+
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  overflow: hidden; /* Aggiungi questa proprietà per prevenire l'overflow */
+  overflow: hidden; 
 }
 
 .grid-container {
   width: 100%;
-  margin: 0 16px;
+  margin: 0 1rem; 
   max-height: 100% !important;
   display: flex;
   justify-content: center;
@@ -21,19 +22,19 @@ mat-card {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 400px;
+  max-width: 25rem; 
   box-sizing: border-box;
-  padding: 24px;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px $card-shadow;
+  padding: 1.5rem; 
+  border-radius: 1.25rem; 
+  box-shadow: 0 0.25rem 0.5rem $card-shadow;
   background: $card-background;
-  border: 1px solid lightslategray; /* Unito le proprietà in una singola linea */
+  border: 1px solid lightslategray; 
 }
 
 mat-card-header {
-  padding: 16px;
-  margin-bottom: 16px;
-  font-size: 24px;
+  padding: 1rem; 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem; 
   font-weight: bold;
   color: grey;
 }
@@ -43,7 +44,7 @@ mat-card-content {
 }
 
 mat-card-content div {
-  margin-top: 16px;
+  margin-top: 1rem; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,18 +53,18 @@ mat-card-content div {
 
 mat-card-content button {
   width: 80%;
-  padding: 12px;
-  font-size: 16px;
+  padding: 0.75rem; 
+  font-size: 1rem; 
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   color: white;
   border: none;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px $card-shadow;
+  border-radius: 0.25rem; 
+  box-shadow: 0 0.125rem 0.25rem $card-shadow; 
   align-self: center;
   background: linear-gradient(to right, $primary-color, $primary-color-hover);
 
   &:hover {
     background: linear-gradient(to right, $primary-color-hover, $primary-color);
-    box-shadow: 0 4px 8px $card-shadow-hover;
+    box-shadow: 0 0.25rem 0.5rem $card-shadow-hover; 
   }
 }
