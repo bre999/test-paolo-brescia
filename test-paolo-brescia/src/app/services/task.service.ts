@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
 import { Store } from '@ngrx/store';
-import { addTask, completeTask, removeTask } from '../store/actions/task.actions';
+import { addTask, completeTask, removeTask, updateTask } from '../store/actions/task.actions';
 import { selectTasksByProject } from '../store/selectors/task.selector';
 
 
@@ -35,5 +35,9 @@ export class TaskService {
   // Rimuove un'attività
   removeTask(taskId: string) {
     this.store.dispatch(removeTask({ taskId }));
+  }
+
+  editTask(task: Task) {
+    this.store.dispatch(updateTask({ task: task }));
   }
 }

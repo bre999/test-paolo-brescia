@@ -1,5 +1,5 @@
 import { ApplicationConfig, isDevMode } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -11,6 +11,6 @@ import { taskReducer } from './store/reducer/task.reducer';
 import { authReducer } from './store/reducer/auth.reducer';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync('noop'), provideStore({projects: projectReducer,
+  providers: [provideRouter(routes, withComponentInputBinding()), provideAnimationsAsync('noop'), provideStore({projects: projectReducer,
     tasks: taskReducer, auth: authReducer}), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }), provideEffects()]
 };

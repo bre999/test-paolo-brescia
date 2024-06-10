@@ -23,9 +23,9 @@ export class LoginComponent {
     const user: User = { 'id':id, 'role':role as UserRole, name: name};
     this.authService.login(user);
     if (role === 'Administrator') {
-      this.router.navigate(['/admin-dashboard']);
+      this.router.navigate(['/admin-dashboard/dashboard']);
     } else {
-      this.router.navigate(['/user-dashboard']);
+      this.router.navigate(['/user-dashboard/dashboard']);
     }
   }
   

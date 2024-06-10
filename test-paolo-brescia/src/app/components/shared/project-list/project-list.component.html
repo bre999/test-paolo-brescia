@@ -1,3 +1,5 @@
+<app-header [sectionTitle]="(currentUser$ | async)?.role === 'Administrator' ? 'Admin Dashboard' : 'User Dashboard'"></app-header>
+
 <div class="project-list-container">
   <div class="header">
     <h1>{{ (currentUser$ | async)?.role === 'Administrator' ? 'Gestione Progetti' : 'I Miei Progetti' }}</h1>
@@ -30,7 +32,7 @@
       </ng-template>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button color="primary" (click)="selectProject(project.id)">{{(getTaskLength(project.id) | async)! > 0 ? 'Visualizza Task': 'Aggiungi Task'}}</button>
+      <button mat-button color="primary" *ngIf="selectedProjectId !== project.id" (click)="selectProject(project.id)">{{(getTaskLength(project.id) | async)! > 0 ? 'Visualizza Task': 'Aggiungi Task'}}</button>
     </mat-card-actions>
     <div *ngIf="selectedProjectId === project.id">
       <app-task-list [projectId]="project.id" [currentUser]="(currentUser$ | async)"></app-task-list>

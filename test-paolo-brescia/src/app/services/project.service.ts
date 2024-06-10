@@ -4,7 +4,7 @@ import { Project } from '../models/project.model';
 import { Observable, filter, map, of, switchMap, take } from 'rxjs';
 import { UserRole } from '../models/user.model';
 import { Store } from '@ngrx/store';
-import { addProject, removeProject } from '../store/actions/project.actions';
+import { addProject, removeProject, updateProject } from '../store/actions/project.actions';
 import { selectAllProject, selectProjectsByUserId } from '../store/selectors/project.selector';
 
 
@@ -15,13 +15,13 @@ export class ProjectService {
   private projects = signal<Project[]>([])
 
   constructor(private auth_service: AuthService, private store: Store) { }
-  
+
   // Ottiene i progetti in base a gli utenti
   getProjects(): Observable<Project[]> {
     return this.authService.getUser().pipe(
       switchMap(user => {
         if (user?.role === 'Utente Standard') {
-          return  this.store.select(selectProjectsByUserId(user.id));
+          return this.store.select(selectProjectsByUserId(user.id));
         } else if (user?.role === 'Administrator' as UserRole) {
           return this.store.select(selectAllProject);
         } else {
@@ -29,6 +29,18 @@ export class ProjectService {
         }
       })
     );
+  }
+
+  getProjectById(projectId: string): Observable<Project> {
+    return this.getProjects().pipe(
+      map(projects => {
+        return projects.find(project => project.id === projectId)!
+      })
+    )
+  }
+
+  editProject(edited_project: Project) {
+    this.store.dispatch(updateProject({ project: edited_project }));
   }
 
 
@@ -46,10 +58,10 @@ export class ProjectService {
           };
           console.log('project');
           console.log(project);
-          
+
           this.store.dispatch(addProject({ project: project }));
-  
-        } 
+
+        }
       })
     ).subscribe();
   }

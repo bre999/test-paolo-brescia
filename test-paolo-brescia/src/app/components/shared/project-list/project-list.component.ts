@@ -13,6 +13,8 @@ import { MatProgressBar } from '@angular/material/progress-bar'
 import { TaskService } from '../../../services/task.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { HeaderComponent } from '../header/header.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -20,16 +22,17 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
   standalone: true,
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  imports: [CommonModule, TaskListComponent, MatCardModule, MatIconModule, MatProgressBar, MatDialogModule]
+  imports: [CommonModule, TaskListComponent, MatCardModule, MatIconModule, MatProgressBar, MatDialogModule,HeaderComponent,]
 })
 export class ProjectListComponent implements OnInit {
   currentUser$: Observable<User | null>;
   projects$: Observable<Project[]>;
   selectedProjectId: string | null = null;
 
-  constructor(private projectService: ProjectService, private authService: AuthService, private taskService: TaskService, private dialog: MatDialog) {
+  constructor(private projectService: ProjectService, private authService: AuthService, private taskService: TaskService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute ) {
     this.projects$ = this.projectService.getProjects();
     this.currentUser$ = this.authService.getUser();
+    
   }
 
 
@@ -41,13 +44,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   addProject() {
-    this.projectService.addProject('name', 'desc');
-    console.log('percentage');
-
-    this.getCompletionPercentage(this.selectedProjectId!).subscribe(console.log)
-    console.log('tasks');
-
-    this.taskService.getTasks(this.selectedProjectId!).subscribe(console.log)
+    this.router.navigate(['../project'], { relativeTo: this.route })
   }
 
   deleteProject(projectId: string) {
@@ -80,7 +77,11 @@ export class ProjectListComponent implements OnInit {
     )
   }
 
-  editProject(project_id: string) { }
+  editProject(projectId: string) { 
+    this.router.navigate(['/admin-dashboard/project'], { queryParams: { 'id': projectId } });
+  }
+
+
   getCompletionPercentage(projectId: string): Observable<number> {
     return this.taskService.getTasks(projectId).pipe(
       map(tasks => {
