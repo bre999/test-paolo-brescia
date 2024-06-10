@@ -43,7 +43,15 @@ export class ProjectService {
   }
 
   editProject(edited_project: Project) {
-    this.store.dispatch(updateProject({ project: edited_project }));
+   
+    this.authService.getUser().pipe(
+      take(1),
+      map(user => {
+        if (user?.role === 'Administrator') {
+          this.store.dispatch(updateProject({ project: edited_project }));
+        }
+      })
+    ).subscribe();
   }
 
 
