@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 import { User } from '../../../models/user.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -30,7 +33,7 @@ export class TaskListComponent implements OnInit {
   tasks$: Observable<Task[]>;
   error: string | null = null;
   currentUser$: Observable<User | null>;
-  constructor(private taskService: TaskService, private authService: AuthService) {
+  constructor(private taskService: TaskService, private authService: AuthService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
     this.currentUser$ = this.authService.getUser();
     this.tasks$ = this.taskService.getTasks(this.projectId!);
   }
@@ -40,23 +43,7 @@ export class TaskListComponent implements OnInit {
   }
 
   addTask() {
-    const newTask: Task = {
-      id: (Math.random() * 1000).toString(),
-      userId: this.currentUser?.id!,
-      projectId: this._projectId!,
-      title: 'Nuova Attività',
-      description: 'Descrizione della nuova attività',
-      dueDate: new Date().toISOString(),
-      completed: false
-    };
-    console.log('newTask');
-    console.log(newTask);
-
-    this.taskService.addTask(newTask);
-    console.log('tsk ng');
-
-    this.tasks$.subscribe(console.log);
-
+    this.router.navigate(['../task'], { relativeTo: this.route , queryParams: { 'projectId': this._projectId}})
   }
 
   completeTask(taskId: string) {
@@ -64,13 +51,22 @@ export class TaskListComponent implements OnInit {
   }
 
   deleteTask(taskId: string) {
-    this.taskService.removeTask(taskId);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Sei sicuro di voler eliminare questo task?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.taskService.removeTask(taskId);
+      }
+    });
   }
 
   private loadTasks(projectId: string): void {
     this.tasks$ = this.taskService.getTasks(projectId);
   }
-  editProject(taskId: string) {
-
+  editTask(taskId: string) {
+    this.router.navigate(['../task'], { relativeTo: this.route, queryParams: { 'taskId': taskId, 'projectId': this._projectId}});
   }
 }

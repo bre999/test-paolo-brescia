@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { TaskListComponent } from '../task-list/task-list.component';
 import { ProjectService } from '../../../services/project.service';
 import { Project } from '../../../models/project.model';
@@ -78,7 +77,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   editProject(projectId: string) { 
-    this.router.navigate(['/admin-dashboard/project'], { queryParams: { 'id': projectId } });
+    this.router.navigate(['../project'], { relativeTo: this.route, queryParams: { 'id': projectId }, });
   }
 
 

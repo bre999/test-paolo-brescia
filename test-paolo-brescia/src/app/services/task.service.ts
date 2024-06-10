@@ -4,7 +4,8 @@ import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
 import { Store } from '@ngrx/store';
 import { addTask, completeTask, removeTask, updateTask } from '../store/actions/task.actions';
-import { selectTasksByProject } from '../store/selectors/task.selector';
+import { selectAllTasks, selectTasksById, selectTasksByProject } from '../store/selectors/task.selector';
+import { Observable, map, take } from 'rxjs';
 
 
 
@@ -18,13 +19,42 @@ export class TaskService {
   constructor(private store: Store){}
 
   // Ottiene le attività di un progetto specifico per un utente specifico
-  getTasks(projectId: string) {
+  getTasks(projectId: string): Observable<Task[]> {
     return this.store.select(selectTasksByProject(projectId));
   }
+  // Ottiene le attività di un progetto specifico per un utente specifico
+  getTaskById(taskId: string): Observable<Task | undefined> {
+    return this.store.select(selectTasksById(taskId));
+  }
 
-  // Aggiunge una nuova attività
-  addTask(task: Task) {
-    this.store.dispatch(addTask({ task: task }));
+
+  
+
+
+  addTask(title: string, description: string, date: string, projectId: string) {
+    this.authService.getUser().pipe(
+      take(1),
+      map(user => {
+        if (user) {
+          const task: Task = {
+            id: (Math.random() * 1000).toString(),
+            userId: user.id,
+            title: title,
+            description: description,
+            dueDate: date,
+            completed: false,
+            projectId: projectId
+          };
+          console.log('task');
+          console.log(task);
+          
+         
+
+          this.store.dispatch(addTask({ task: task }));
+
+        }
+      })
+    ).subscribe();
   }
 
   // Completa un'attività

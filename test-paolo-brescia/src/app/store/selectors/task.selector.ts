@@ -17,3 +17,9 @@ export const selectTasksByProject = (projectId: string) => createSelector(
   selectAllTasks,
   (tasks: Task[]) => tasks.filter(task => !!task.projectId && task.projectId === projectId)
 );
+
+// Selettore per ottenere i task di un progetto specifico
+export const selectTasksById = (taskId: string) => createSelector(
+  selectAllTasks,
+  (tasks: Task[]) => tasks.find(task => !!task.id && task.id === taskId)
+);
