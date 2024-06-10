@@ -10,16 +10,19 @@
   <mat-card *ngFor="let project of (projects$ | async)" class="project-item">
     <mat-card-header>
       <mat-card-title (click)="selectProject(project.id)">{{ project.name }}</mat-card-title>
-      <div class="project-actions" *ngIf="(currentUser$| async)!.role === 'Administrator'">
+      <div class="project-actions" >
         <button *ngIf="selectedProjectId === project.id" mat-icon-button class="action-button" (click)="clearSelection()">
           <mat-icon>visibility_off</mat-icon>
         </button>
-        <button mat-icon-button class="action-button" (click)="editProject(project.id)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button class="action-button" (click)="deleteProject(project.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
+        <ng-container *ngIf="(currentUser$| async)!.role === 'Administrator'">
+          <button mat-icon-button class="action-button" (click)="editProject(project.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="action-button" (click)="deleteProject(project.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-container>
+      
        
       </div>
     </mat-card-header>
