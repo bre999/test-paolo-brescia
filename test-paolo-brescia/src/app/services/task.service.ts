@@ -28,9 +28,6 @@ export class TaskService {
   }
 
 
-  
-
-
   addTask(title: string, description: string, date: string, projectId: string) {
     this.authService.getUser().pipe(
       take(1),
@@ -45,13 +42,7 @@ export class TaskService {
             completed: false,
             projectId: projectId
           };
-          console.log('task');
-          console.log(task);
-          
-         
-
           this.store.dispatch(addTask({ task: task }));
-
         }
       })
     ).subscribe();

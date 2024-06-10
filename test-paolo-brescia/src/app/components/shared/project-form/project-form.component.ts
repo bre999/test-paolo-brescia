@@ -47,9 +47,6 @@ export class ProjectFormComponent {
   onSubmit() {
     if (this.projectForm.valid) {
       const new_project = this.projectForm.value; // Ottiene i valori del form
-      console.log('new_project');
-      console.log(new_project);
-
       if (this.editing_project) {
         // Crea un nuovo oggetto combinando le proprietà di editing_project con quelle di new_project
         const updated_project = {

@@ -25,7 +25,6 @@ export class HeaderComponent {
     this.user$ = this.auth.getUser();
   }
   logout(){
-    console.log('logginoute');
     this.auth.logout()
     this.router.navigate(['/login']);
   }

@@ -18,7 +18,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router, private store: Store) { }
 
-  // Funzione generica di login che accetta il ruolo e l'ID dell'utente
+  
   login(role: string, id: string, name: string) {
     const user: User = { 'id':id, 'role':role as UserRole, name: name};
     this.authService.login(user);

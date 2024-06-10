@@ -23,7 +23,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./project-list.component.scss'],
   imports: [CommonModule, TaskListComponent, MatCardModule, MatIconModule, MatProgressBar, MatDialogModule,HeaderComponent,]
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectListComponent {
   currentUser$: Observable<User | null>;
   projects$: Observable<Project[]>;
   selectedProjectId: string | null = null;
@@ -31,15 +31,6 @@ export class ProjectListComponent implements OnInit {
   constructor(private projectService: ProjectService, private authService: AuthService, private taskService: TaskService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute ) {
     this.projects$ = this.projectService.getProjects();
     this.currentUser$ = this.authService.getUser();
-    
-  }
-
-
-  ngOnInit(): void {
-    let cici = ['ciao', 'halo']
-    console.log('cici.length');
-    console.log(cici.length);
-
   }
 
   addProject() {
@@ -47,7 +38,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   deleteProject(projectId: string) {
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { message: 'Sei sicuro di voler eliminare questo progetto?' }

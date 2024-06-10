@@ -18,7 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./task-list.component.scss'],
   imports: [CommonModule, MatCardModule, MatIconModule]
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent  {
 
   private _projectId: string | undefined;
   @Input() currentUser: User | null = null; // Permette di specificare se il componente è usato dall'amministratore
@@ -36,10 +36,6 @@ export class TaskListComponent implements OnInit {
   constructor(private taskService: TaskService, private authService: AuthService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
     this.currentUser$ = this.authService.getUser();
     this.tasks$ = this.taskService.getTasks(this.projectId!);
-  }
-
-  ngOnInit(): void {
-    this.tasks$.subscribe(console.log)
   }
 
   addTask() {

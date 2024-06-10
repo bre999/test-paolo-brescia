@@ -10,13 +10,39 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Location } from '@angular/common';
 import { MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MAT_DATE_FORMATS, MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, ReactiveFormsModule, MatCardModule, MatInputModule, MatCardTitle],
+  imports: [
+    HeaderComponent, 
+    CommonModule, 
+    ReactiveFormsModule, 
+    MatCardModule, 
+    MatInputModule, 
+    MatCardTitle, 
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   templateUrl: './task-form.component.html',
-  styleUrl: './task-form.component.scss'
+  styleUrl: './task-form.component.scss',
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ]
 })
 export class TaskFormComponent {
   private _projectId: string | undefined;
@@ -29,17 +55,12 @@ export class TaskFormComponent {
       this.taskService.getTaskById(taskId).subscribe(task=>{
        this.editing_task = task;
        this.taskForm.patchValue(task!);
-       console.log(this.editing_task);
-       
       })
     }
   }
   @Input()
   set projectId(projectId: string) {
     if(projectId){
-      console.log('projectId');
-      console.log(projectId);
-      
      this._projectId = projectId
     }
   }
@@ -52,13 +73,16 @@ export class TaskFormComponent {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(3)]],
-     
+      dueDate: ['', Validators.required]
     });
   }
 
   onSubmit() {
     if (this.taskForm.valid) {
-      const newTask = this.taskForm.value; 
+      const newTask = {
+        ...this.taskForm.value,
+        dueDate: this.taskForm.value.dueDate
+      };
       if (this.editing_task) {
         const updatedTask = {
           ...this.editing_task,
@@ -67,9 +91,11 @@ export class TaskFormComponent {
         this.taskService.editTask(updatedTask);
       } else {
      
-        this.taskService.addTask(newTask.title, newTask.description, '', this._projectId!);
+        this.taskService.addTask(newTask.title, newTask.description, newTask.dueDate, this._projectId!);
       }
       this.location.back();
     }
   }
 }
+
+

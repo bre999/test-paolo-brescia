@@ -56,9 +56,6 @@ export class ProjectService {
             name: name,
             description: description
           };
-          console.log('project');
-          console.log(project);
-
           this.store.dispatch(addProject({ project: project }));
 
         }
